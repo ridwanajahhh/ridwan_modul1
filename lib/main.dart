@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ridwan_modul1/login.dart'; // Halaman login yang kamu buat
+import 'package:ridwan_modul1/home.dart'; 
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +11,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      title: 'Aplikasi Flutter',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      debugShowCheckedModeBanner: false,
+      home: const LoginPage(), 
     );
   }
 }
