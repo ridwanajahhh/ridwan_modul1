@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ridwan_modul1/login.dart'; // Halaman login yang kamu buat
+import 'package:ridwan_modul1/login.dart'; 
 import 'package:ridwan_modul1/home.dart'; 
 
 void main() {

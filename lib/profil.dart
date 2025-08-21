@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ridwan_modul1/profil.dart';
-import 'package:ridwan_modul1/login.dart'; // Import halaman login
+import 'package:ridwan_modul1/login.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   void _logout(BuildContext context) {
-    // TODO: Tambahkan logika logout seperti hapus token jika diperlukan
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => const LoginPage()),
     );
@@ -115,7 +114,7 @@ class TopPortion extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(''), // Ganti dengan URL foto profil
+                      image: NetworkImage(''), 
                     ),
                   ),
                 ),

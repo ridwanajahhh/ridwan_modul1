@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             ),
                           ),
-                          // Tidak ada validator
+                          
                         ),
                         const SizedBox(height: 20),
 
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             onPressed: () {
-                              // Tidak perlu validasi
+                              
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(builder: (context) => const HomePage()),
