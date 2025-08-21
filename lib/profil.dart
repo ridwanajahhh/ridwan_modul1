@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:ridwan_modul1/profil.dart';
+import 'package:ridwan_modul1/edit_profil_page.dart';
+import 'package:ridwan_modul1/edit_profil_page.dart';
 import 'package:ridwan_modul1/login.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   void _logout(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const LoginPage()),
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Konfirmasi Logout'),
+        content: const Text('Apakah kamu yakin ingin logout?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Batal'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
+            child: const Text('Ya'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -53,13 +73,20 @@ class ProfilePage extends StatelessWidget {
                         label: const Text("Follow"),
                         icon: const Icon(Icons.person_add_alt_1),
                       ),
-                      const SizedBox(width: 16.0),
+                      const SizedBox(width: 16),
                       FloatingActionButton.extended(
-                        onPressed: () {},
-                        heroTag: "message",
-                        backgroundColor: Colors.red,
-                        label: const Text("Message"),
-                        icon: const Icon(Icons.message_rounded),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const EditProfilePage(),
+                            ),
+                          );
+                        },
+                        heroTag: "edit",
+                        backgroundColor: Colors.orange,
+                        label: const Text("Edit"),
+                        icon: const Icon(Icons.edit),
                       ),
                     ],
                   ),
@@ -114,7 +141,7 @@ class TopPortion extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(''), 
+                      image: NetworkImage(''),
                     ),
                   ),
                 ),
@@ -125,7 +152,7 @@ class TopPortion extends StatelessWidget {
                     radius: 20,
                     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     child: Container(
-                      margin: const EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.all(8),
                       decoration: const BoxDecoration(
                         color: Colors.green,
                         shape: BoxShape.circle,
@@ -158,38 +185,44 @@ class ProfileInfoRow extends StatelessWidget {
       height: 80,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: items
-            .map(
-              (item) => Expanded(
-                child: Row(
-                  children: [
-                    if (items.indexOf(item) != 0) const VerticalDivider(),
-                    Expanded(child: _singleItem(context, item)),
-                  ],
-                ),
+        children: items.map(
+          (item) {
+            final isFirst = items.indexOf(item) == 0;
+            return Expanded(
+              child: Row(
+                children: [
+                  if (!isFirst) const VerticalDivider(),
+                  Expanded(child: _singleItem(context, item)),
+                ],
               ),
-            )
-            .toList(),
+            );
+          },
+        ).toList(),
       ),
     );
   }
 
-  Widget _singleItem(BuildContext context, ProfileInfoItem item) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              item.value.toString(),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+  Widget _singleItem(BuildContext context, ProfileInfoItem item) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(
+            item.value.toString(),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
           ),
-          Text(item.title, style: Theme.of(context).textTheme.bodySmall),
-        ],
-      );
+        ),
+        Text(
+          item.title,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ],
+    );
+  }
 }
 
 class ProfileInfoItem {

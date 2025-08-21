@@ -29,7 +29,12 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 
+                Image.asset(
+                  'assets/logo.jpeg', 
+                  height: 100,
+                ),
 
+                const SizedBox(height: 24),
                 Container(
                   padding: const EdgeInsets.all(24.0),
                   decoration: BoxDecoration(
@@ -49,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Text(
-                          'Selamat Datang',
+                          'Selamat Datang SNSB',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -66,7 +71,9 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                             labelText: 'Email',
                             prefixIcon: const Icon(Icons.email_outlined),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -76,10 +83,14 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                             labelText: 'Kata Sandi',
                             prefixIcon: const Icon(Icons.lock_outline),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                                _isPasswordVisible
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -88,7 +99,6 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             ),
                           ),
-                          
                         ),
                         const SizedBox(height: 20),
 
@@ -103,10 +113,11 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             onPressed: () {
-                              
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => const HomePage()),
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
                               );
                             },
                             child: const Text(
