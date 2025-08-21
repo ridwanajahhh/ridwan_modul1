@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:ridwan_modul1/profil.dart'; 
-
+import 'package:ridwan_modul1/profil.dart';
+import 'package:ridwan_modul1/login.dart'; // Import halaman login
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  void _logout(BuildContext context) {
+    // TODO: Tambahkan logika logout seperti hapus token jika diperlukan
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () => _logout(context),
+          tooltip: 'Logout',
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      extendBodyBehindAppBar: true,
       body: Column(
         children: [
-          Expanded(
+          const Expanded(
             flex: 2,
-            child: const TopPortion(),
+            child: TopPortion(),
           ),
           Expanded(
             flex: 3,
@@ -21,7 +38,7 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Richie Lurie",
+                    "riddSNSB",
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
@@ -52,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -73,7 +90,10 @@ class TopPortion extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
-              colors: [Color.fromARGB(255, 93, 102, 107), Color.fromARGB(255, 218, 234, 245)],
+              colors: [
+                Color.fromARGB(255, 93, 102, 107),
+                Color.fromARGB(255, 218, 234, 245),
+              ],
             ),
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(50),
@@ -95,9 +115,7 @@ class TopPortion extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(
-                        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-                      ),
+                      image: NetworkImage(''), // Ganti dengan URL foto profil
                     ),
                   ),
                 ),
@@ -146,8 +164,7 @@ class ProfileInfoRow extends StatelessWidget {
               (item) => Expanded(
                 child: Row(
                   children: [
-                    if (items.indexOf(item) != 0)
-                      const VerticalDivider(),
+                    if (items.indexOf(item) != 0) const VerticalDivider(),
                     Expanded(child: _singleItem(context, item)),
                   ],
                 ),
@@ -166,7 +183,9 @@ class ProfileInfoRow extends StatelessWidget {
             child: Text(
               item.value.toString(),
               style: const TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 20),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
           ),
           Text(item.title, style: Theme.of(context).textTheme.bodySmall),
